@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flim God</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="home.js" >
+    <style>
+        #gardient{
+            height: 100%;
+            background: black; /* For browsers that do not support gradients */
+            /*background: linear-gradient(to bottom, rgba(102, 135, 89,0), rgba(102, 135, 89,1));*/
+            background: linear-gradient(to bottom, rgba(255, 106, 106,0), rgba(255, 106, 106,1)); /* Standard syntax (must be last) */
+            font-family:"Bell MT";
+
+        }
+    </style>
+</head>
+
+<body id="gardient">
+<nav>
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"><i class="material-icons" style="margin-left:5px">cloud
+        </i><b>Movie Time</b></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+            <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+            <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+            <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <ul id="movie-list">
+            <li>
+                <template id="movie-detail-template">
+                    <div class="col s12 m4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{this.poster}}">
+                                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">star</i></a>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title"><i><b>{{this.title}}</b></i></span>
+                                <p><i>Cast:</i> {{this.cast}}</p>
+                                <a href="{{this.link}}" style="color:tomato"><i>Trailer link<i></a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</div>
+</body>
+<script>
+    const movies = [
+        {
+            title: "Beauty and The Beast",
+            poster: "https://images-na.ssl-images-amazon.com/images/I/517vc88oLgL.jpg",
+            cast: "Emma Watson,Dan Stevens",
+            link:"https://youtu.be/e3Nl_TCQXuw"
+        },
+        {
+            title: "Venom",
+            poster: "https://www.joblo.com/assets/images/oldsite/posters/images/full/venompostertransform.jpg",
+            cast: "alslals",
+            link:"https://www.youtube.com/watch?v=RBumgq5yVrA"
+        },
+        {
+            title: "Star Trek Beyond",
+            poster: "https://racheldaymoviepresspack.files.wordpress.com/2015/10/maleficent_movie_poster_2.jpg",
+            cast: "skskdk",
+            link:"https://www.youtube.com/watch?v=RBumgq5yVrA"
+        },
+        {
+            title: "Me before you",
+            poster: "https://cdn.cinematerial.com/p/297x/9ebaqxve/maze-runner-the-death-cure-movie-poster-md.jpg",
+            cast: "skskks",
+            link:"https://www.youtube.com/watch?v=RBumgq5yVrA"
+        }
+    ];
+    class movieReview{
+        constructor(title,poster,cast,link){
+            this.title =title;
+            this.poster = poster;
+            this.cast = cast;
+            this.link = link;
+            this.movieDetailTemplate = document.getElementById("movie-detail-template").innerHTML;
+        }
+        render(){
+            const result = this.movieDetailTemplate
+                .replace("{{this.title}}",this.title)
+                .replace("{{this.poster}}",this.poster)
+                .replace("{{this.cast}}",this.cast)
+                .replace("{{this.link}}",this.link)
+            return result;
+        }
+    }
+    let movie_Review=[];
+    const nodelist = document.querySelectorAll("#movie-list li");
+    for(let i=0; i < movies.length; i++) {
+        let title = movies[i].title;
+        let poster = movies[i].poster;
+        let cast = movies[i].cast;
+        let link = movies[i].link;
+        movie_Review[i] = new movieReview(title, poster, cast, link);
+        console.log(movie_Review);
+        for (let item of nodelist) {
+            item.innerHTML = movie_Review[i].render();
+        }
+    }
+</script>
+
+</html>
