@@ -40,7 +40,7 @@
                     <div class="col s12 m4">
                         <div class="card">
                             <div class="card-image">
-                                <img src="{{this.poster}}">
+                                <img src="{{this.poster}}" style="height: 350px">
                                 <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">star</i></a>
                             </div>
                             <div class="card-content">
@@ -52,11 +52,6 @@
                     </div>
                 </template>
             </li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
         </ul>
     </div>
 </div>
@@ -115,7 +110,7 @@
         movie_Review[i] = new movieReview(title, poster, cast, link);
         console.log(movie_Review);
         for (let item of nodelist) {
-            item.innerHTML = movie_Review[i].render();
+            item.innerHTML += movie_Review[i].render();
         }
     }
 </script>
